@@ -7,14 +7,13 @@ spring:
       max-file-size: 50MB
       enabled: true
   datasource:
-    url: jdbc:mysql://localhost:3306/book_connect
-    username: replace_me_username
-    password: replace_me_password
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/book_connect
+    username: replaceMeUsername
+    password: replaceMePassword
   jpa:
     hibernate:
       ddl-auto: update
-    database-platform: org.hibernate.dialect.MySQLDialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 springdoc:
   default-consumes-media-type: application/json
   file:
@@ -25,6 +24,13 @@ logging:
   level:
     org.springframework: INFO
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
 user:
   config:
     jwt-secret-key:
+    allowed-origin:
