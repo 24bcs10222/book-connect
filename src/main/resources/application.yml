@@ -20,9 +20,9 @@ springdoc:
     upload:
       photos-output-path: ./uploads
 
-logging:
-  level:
-    org.springframework: INFO
+#logging:
+#  level:
+#    org.springframework: INFO
 
 management:
   endpoints:
