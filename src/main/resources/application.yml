@@ -8,8 +8,8 @@ spring:
       enabled: true
   datasource:
     url: jdbc:postgresql://localhost:5432/book_connect
-    username: replaceMeUsername
-    password: replaceMePassword
+    username: replace_me_username
+    password: replace_me_password
   jpa:
     hibernate:
       ddl-auto: update
