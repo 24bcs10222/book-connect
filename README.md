@@ -35,4 +35,4 @@ npm install    // Install the necessary dependencies:
 ng serve --port 3000
 ```
 
- ### Note: The UI currently does not have full basic functionality.
+ ### Note: The UI currently does not have full basic functionality yet.
