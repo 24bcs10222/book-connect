@@ -40,15 +40,15 @@ jobs:
 
       - name: Creating test database and granting privileges
         run: |
-          psql -h127.0.0.1 -U postgres -c "CREATE DATABASE IF NOT EXISTS book_connect;"
-          psql -h127.0.0.1 -U postgres -c "CREATE USER ${{ secrets.DATABASE_USER }} WITH PASSWORD '${{ secrets.MYSQL_PASSWORD }}';"
-          psql -h127.0.0.1 -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE book_connect TO ${{ secrets.DATABASE_USER }};"
+          PGPASSWORD=${{ secrets.DATABASE_ROOT_PASSWORD }} psql -h127.0.0.1 -U postgres -c "CREATE DATABASE IF NOT EXISTS book_connect;"
+          PGPASSWORD=${{ secrets.DATABASE_ROOT_PASSWORD }} psql -h127.0.0.1 -U postgres -c "CREATE USER ${{ secrets.DATABASE_USER }} WITH PASSWORD '${{ secrets.MYSQL_PASSWORD }}';"
+          PGPASSWORD=${{ secrets.DATABASE_ROOT_PASSWORD }} psql -h127.0.0.1 -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE book_connect TO ${{ secrets.DATABASE_USER }};"
 
       - name: Injecting required data
         run: |
           sed -i 's/username: replace_me_username/username: ${{ secrets.DATABASE_USER }}/' src/main/resources/application.yml
           sed -i 's/password: replace_me_password/password: ${{ secrets.MYSQL_PASSWORD }}/' src/main/resources/application.yml
-          sed -i '/jwt-secret-key:/ s/$/ ${{secrets.JWT_SECRET_KEY}}/' src/main/resources/application.yml
+          sed -i '/jwt-secret-key:/ s/$/ ${{ secrets.JWT_SECRET_KEY }}/' src/main/resources/application.yml
 
       - name: Building BookConnect
         run: mvn -B package --file pom.xml
